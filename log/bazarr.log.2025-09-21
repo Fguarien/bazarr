@@ -1,0 +1,57 @@
+2025-09-21 00:43:08|INFO    |root                            |Scheduler will use this timezone: Europe/Brussels|
+2025-09-21 00:43:21|INFO    |root                            |Plex OAuth cache cleanup started|
+2025-09-21 00:43:45|INFO    |root                            |Interactive jobs queue started and waiting for tasks|
+2025-09-21 00:43:45|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-09-21 00:43:45|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-09-21 00:43:45|INFO    |root                            |BAZARR trying to connect to Sonarr SignalR feed...|
+2025-09-21 00:43:46|INFO    |root                            |BAZARR trying to connect to Radarr SignalR feed...|
+2025-09-21 00:43:46|INFO    |root                            |BAZARR SignalR client for Sonarr is connected and waiting for events.|
+2025-09-21 00:43:47|INFO    |root                            |BAZARR SignalR client for Radarr is connected and waiting for events.|
+2025-09-21 04:00:43|INFO    |root                            |BAZARR All existing movie subtitles indexed from disk.|
+2025-09-21 04:02:44|INFO    |root                            |BAZARR All existing episode subtitles indexed from disk.|
+2025-09-21 06:15:00|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-09-21 06:41:19|INFO    |plex.operations                 |Refreshed movie: WarGames (IMDB: tt0086567)|
+2025-09-21 06:41:27|INFO    |plex.operations                 |Refreshed movie: Zoe (IMDB: tt6010628)|
+2025-09-21 06:41:32|INFO    |plex.operations                 |Refreshed movie: Zone 414 (IMDB: tt8545482)|
+2025-09-21 06:41:32|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-09-21 09:50:33|ERROR   |root                            |BAZARR SignalR client for Sonarr connection as been lost. Trying to reconnect...|
+2025-09-21 09:52:28|INFO    |root                            |Scheduler will use this timezone: Europe/Brussels|
+2025-09-21 09:52:30|INFO    |root                            |Plex OAuth cache cleanup started|
+2025-09-21 09:52:33|INFO    |root                            |Interactive jobs queue started and waiting for tasks|
+2025-09-21 09:52:33|INFO    |root                            |BAZARR trying to connect to Sonarr SignalR feed...|
+2025-09-21 09:52:33|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-09-21 09:52:33|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-09-21 09:52:33|INFO    |root                            |BAZARR trying to connect to Radarr SignalR feed...|
+2025-09-21 09:52:33|INFO    |root                            |BAZARR SignalR client for Sonarr is connected and waiting for events.|
+2025-09-21 09:52:33|INFO    |root                            |BAZARR SignalR client for Radarr is connected and waiting for events.|
+2025-09-21 15:16:01|INFO    |root                            |Using opensubtitles again after 12 hours, (disabled because: PaymentRequired)|
+2025-09-21 15:16:02|INFO    |root                            |Provider opensubtitlescom throttle count 1 of 5, waiting 5sec and trying again|
+2025-09-21 15:16:10|INFO    |plex.operations                 |Refreshed movie: Gluten: Public Enemy? (IMDB: tt14451878)|
+2025-09-21 15:16:11|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-09-21 15:53:09|INFO    |plex.operations                 |Refreshed episode: Concordia S01E02 (IMDB: tt11324982)|
+2025-09-21 15:53:14|INFO    |plex.operations                 |Refreshed episode: Fire Country S03E06 (IMDB: tt16098700)|
+2025-09-21 15:53:52|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-09-21 16:12:28|ERROR   |root                            |BAZARR SignalR client for Sonarr connection as been lost. Trying to reconnect...|
+2025-09-21 16:12:28|ERROR   |root                            |BAZARR SignalR client for Radarr connection as been lost. Trying to reconnect...|
+2025-09-21 16:15:01|INFO    |root                            |Scheduler will use this timezone: Europe/Brussels|
+2025-09-21 16:15:04|INFO    |root                            |Plex OAuth cache cleanup started|
+2025-09-21 16:15:11|INFO    |root                            |Interactive jobs queue started and waiting for tasks|
+2025-09-21 16:15:11|INFO    |root                            |BAZARR trying to connect to Sonarr SignalR feed...|
+2025-09-21 16:15:11|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-09-21 16:15:11|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-09-21 16:15:11|INFO    |root                            |BAZARR trying to connect to Radarr SignalR feed...|
+2025-09-21 16:15:11|INFO    |root                            |BAZARR SignalR client for Sonarr is connected and waiting for events.|
+2025-09-21 16:15:11|INFO    |root                            |BAZARR SignalR client for Radarr is connected and waiting for events.|
+2025-09-21 17:37:03|ERROR   |root                            |BAZARR SignalR client for Sonarr connection as been lost. Trying to reconnect...|
+2025-09-21 17:37:03|ERROR   |root                            |BAZARR SignalR client for Radarr connection as been lost. Trying to reconnect...|
+2025-09-21 17:38:45|INFO    |root                            |Scheduler will use this timezone: Europe/Brussels|
+2025-09-21 17:38:47|INFO    |root                            |Plex OAuth cache cleanup started|
+2025-09-21 17:38:50|INFO    |root                            |Interactive jobs queue started and waiting for tasks|
+2025-09-21 17:38:50|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-09-21 17:38:50|INFO    |root                            |BAZARR trying to connect to Sonarr SignalR feed...|
+2025-09-21 17:38:50|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-09-21 17:38:50|INFO    |root                            |BAZARR trying to connect to Radarr SignalR feed...|
+2025-09-21 17:38:50|INFO    |root                            |BAZARR SignalR client for Sonarr is connected and waiting for events.|
+2025-09-21 17:38:50|INFO    |root                            |BAZARR SignalR client for Radarr is connected and waiting for events.|
+2025-09-21 23:03:38|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-09-21 23:20:24|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
