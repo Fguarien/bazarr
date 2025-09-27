@@ -1,0 +1,23 @@
+2025-09-25 04:00:13|INFO    |root                            |BAZARR All existing movie subtitles indexed from disk.|
+2025-09-25 04:01:46|INFO    |root                            |BAZARR All existing episode subtitles indexed from disk.|
+2025-09-25 04:05:20|INFO    |plex.operations                 |Refreshed episode: Marvel's The Punisher S01E13 (IMDB: tt5675620)|
+2025-09-25 04:13:19|INFO    |root                            |BAZARR Finished searching for Subtitles to upgrade. Check History for more information.|
+2025-09-25 04:55:36|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-09-25 05:20:19|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-09-25 10:54:50|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-09-25 11:20:07|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-09-25 15:07:21|ERROR   |root                            |BAZARR SignalR client for Radarr connection as been lost. Trying to reconnect...|
+2025-09-25 15:07:22|ERROR   |root                            |BAZARR SignalR client for Sonarr connection as been lost. Trying to reconnect...|
+2025-09-25 15:10:29|INFO    |root                            |Scheduler will use this timezone: Europe/Brussels|
+2025-09-25 15:10:32|INFO    |root                            |Plex OAuth cache cleanup started|
+2025-09-25 15:10:38|INFO    |root                            |Interactive jobs queue started and waiting for tasks|
+2025-09-25 15:10:38|INFO    |root                            |BAZARR trying to connect to Sonarr SignalR feed...|
+2025-09-25 15:10:38|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-09-25 15:10:38|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-09-25 15:10:38|INFO    |root                            |BAZARR trying to connect to Radarr SignalR feed...|
+2025-09-25 15:10:39|INFO    |root                            |BAZARR SignalR client for Sonarr is connected and waiting for events.|
+2025-09-25 15:10:39|INFO    |root                            |BAZARR SignalR client for Radarr is connected and waiting for events.|
+2025-09-25 20:03:43|INFO    |root                            |Provider opensubtitlescom throttle count 1 of 5, waiting 5sec and trying again|
+2025-09-25 20:03:49|INFO    |root                            |Provider opensubtitlescom throttle count 2 of 5, waiting 5sec and trying again|
+2025-09-25 20:03:54|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-09-25 20:40:56|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
