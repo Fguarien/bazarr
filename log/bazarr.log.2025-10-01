@@ -1,0 +1,14 @@
+2025-10-01 04:00:54|INFO    |root                            |BAZARR All existing movie subtitles indexed from disk.|
+2025-10-01 04:02:17|INFO    |root                            |BAZARR All existing episode subtitles indexed from disk.|
+2025-10-01 05:39:22|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-01 05:43:40|INFO    |root                            |BAZARR Finished searching for Subtitles to upgrade. Check History for more information.|
+2025-10-01 06:00:34|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-01 11:39:22|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-01 11:55:15|INFO    |root                            |Provider opensubtitlescom throttle count 1 of 5, waiting 5sec and trying again|
+2025-10-01 11:55:25|INFO    |root                            |Provider opensubtitlescom throttle count 2 of 5, waiting 5sec and trying again|
+2025-10-01 11:56:44|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-01 17:39:33|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-01 17:41:30|INFO    |root                            |BAZARR Finished searching for Subtitles to upgrade. Check History for more information.|
+2025-10-01 17:57:19|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-01 23:39:22|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-01 23:57:13|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|

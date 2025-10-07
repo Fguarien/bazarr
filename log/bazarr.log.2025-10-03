@@ -1,0 +1,16 @@
+2025-10-03 04:00:42|INFO    |root                            |BAZARR All existing movie subtitles indexed from disk.|
+2025-10-03 04:02:29|INFO    |root                            |BAZARR All existing episode subtitles indexed from disk.|
+2025-10-03 05:39:34|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-03 05:41:28|INFO    |root                            |BAZARR Finished searching for Subtitles to upgrade. Check History for more information.|
+2025-10-03 05:58:50|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-03 11:39:23|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-03 12:07:02|INFO    |plex.operations                 |Refreshed episode: Concordia S01E03 (IMDB: tt11324982)|
+2025-10-03 12:07:07|INFO    |plex.operations                 |Refreshed episode: Concordia S01E04 (IMDB: tt11324982)|
+2025-10-03 12:08:36|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-03 17:39:34|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-03 17:41:32|INFO    |root                            |BAZARR Finished searching for Subtitles to upgrade. Check History for more information.|
+2025-10-03 17:57:42|INFO    |plex.operations                 |Refreshed episode: Concordia S01E05 (IMDB: tt11324982)|
+2025-10-03 17:58:30|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
+2025-10-03 23:39:22|INFO    |root                            |BAZARR Finished searching for missing Movies Subtitles. Check History for more information.|
+2025-10-03 23:55:09|WARNING |retry.api                       |('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')), retrying in 5 seconds...|
+2025-10-03 23:58:17|INFO    |root                            |BAZARR Finished searching for missing Series Subtitles. Check History for more information.|
