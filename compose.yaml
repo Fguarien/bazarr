@@ -1,91 +1,226 @@
 services:
   bazarr:
-    image: ghcr.io/linuxserver/bazarr
+    image: ghcr.io/hotio/bazarr
     container_name: bazarr
     environment:
-      - PUID=1026
-      - PGID=100
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Europe/Brussels
     volumes:
-      - /volume1/docker/bazarr:/config
-      - "/volume1/Media/Movies:/movies:rw"
-      - "/volume1/Media/TV Shows:/tv:rw"
+      - /Volumes/docker/bazarr:/config
+      - "/Volumes/Media/Movies:/movies:rw"
+      - "/Volumes/Media/TV Shows:/tv:rw"
+    networks:
+      - media_services_network
     ports:
       - "6767:6767"
-    restart: unless-stopped
-
+    restart: always
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
   radarr:
-    image: lscr.io/linuxserver/radarr
+    image: ghcr.io/hotio/radarr
     container_name: radarr
     environment:
-      - PUID=1026
-      - PGID=100
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
     volumes:
-      - /volume1/docker/radarr:/config
-      - /volume1/downloads:/downloads
-      - "/volume1/Media/Movies:/movies:rw"
+      - /Volumes/docker/radarr:/config
+      - /Volumes/downloads:/downloads
+      - "/Volumes/Media/Movies:/movies:rw"
+    networks:
+      - media_services_network
     ports:
       - "7878:7878"
-    restart: unless-stopped
-
+    restart: always
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
   sonarr:
-    image: lscr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
-      - PUID=1026
-      - PGID=100
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
     volumes:
-      - /volume1/docker/sonarr:/config
-      - /volume1/downloads:/downloads
-      - "/volume1/Media/TV Shows:/tv:rw"
+      - /Volumes/docker/sonarr:/config
+      - /Volumes/downloads:/downloads
+      - "/Volumes/Media/TV Shows:/tv:rw"
+    networks:
+      - media_services_network
     ports:
       - "8989:8989"
-    restart: unless-stopped
-
+    restart: always
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
   jackett:
-    image: ghcr.io/linuxserver/jackett
+    image: ghcr.io/hotio/jackett
     container_name: jackett
     environment:
       - AUTO_UPDATE=true
-      - PUID=1026
-      - PGID=100
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Europe/Bucharest
     volumes:
-      - /volume1/docker/jackett/config:/config
-      - /volume1/docker/jackett/downloads:/downloads
+      - /Volumes/docker/jackett/config:/config
+      - /Volumes/docker/jackett/downloads:/downloads
+    networks:
+      - media_services_network
     ports:
       - 9117:9117
     restart: always
-  
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
   lidarr:
-    image: ghcr.io/linuxserver/lidarr:latest
+    image: ghcr.io/hotio/lidarr:nightly
     container_name: lidarr
     environment:
-      - PUID=1026         
-      - PGID=100          
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
     volumes:
-      - /volume1/docker/lidarr/config:/config
-      - /volume1/music/organized:/music
-      - /volume1/music/deleted:/trashed
-      - /volume1/downloads:/downloads
+      - /Volumes/docker/lidarr/config:/config
+      - /Volumes/music/organized:/music
+      - /Volumes/music/Classical:/classical
+      - /Volumes/music/deleted:/trashed
+      - /Volumes/downloads:/downloads
+    networks:
+      - media_services_network
     ports:
-      - "8686:8686"       
-    restart: unless-stopped
-
-  readarr:
-    image: linuxserver/readarr:0.1.0-nightly-alpine
-    container_name: readarr
+      - "8686:8686"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 8G
+        reservations:
+          cpus: '0.1'
+          memory: 2G
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  overseerr:
+    image: ghcr.io/hotio/overseerr
+    container_name: overseerr
     environment:
-      - PUID=1026         # À adapter à ton utilisateur DSM
-      - PGID=100          # À adapter à ton groupe DSM
-      - TZ=Europe/Brussels
+      - TZ=${TZ}
+      - LOG_LEVEL=${OVERSEERR_LOG_LEVEL}
     volumes:
-      - /volume1/docker/readarr/config:/config
-      - /volume1/Readable:/books        # Bibliothèque
-      - /volume1/downloads:/downloads      # Dossier de téléchargement
+      - ${DATA_ROOT}/config:/app/config
+    networks:
+      - media_services_network
     ports:
-      - 8787:8787                         
-    restart: unless-stopped
+      - "${OVERSEERR_HTTP_PORT}:5055"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:5055/api/v1/status >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    restart: always
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  unpackerr:
+    image: ghcr.io/hotio/unpackerr
+    container_name: unpackerr
+    networks:
+      - media_services_network
+    volumes:
+      - /Volumes/docker/bazarr/compose.yaml
+      - /Volumes/downloads:/downloads
+    restart: always
+    environment:
+      - TZ=America/New_York
+      - UN_LOG_FILE=/downloads/unpackerr.log
+      - UN_SONARR_0_URL=${UN_SONARR_0_URL}
+      - UN_SONARR_0_API_KEY=${UN_SONARR_0_API_KEY}
+      - UN_RADARR_0_URL=${UN_RADARR_0_URL}
+      - UN_RADARR_0_API_KEY=${UN_RADARR_0_API_KEY}
+    mem_limit: 12g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      #- USER=${USER}
+      #
+      - PASS=${PASS}
+    volumes:
+      - /Volumes/downloads:/downloads
+      - /Volumes/docker/bazarr/compose.yaml:/config/bazarr.yaml
+      - /Volumes/downloads/watch:/watch
+    networks:
+      - media_services_network
+    ports:
+      - 9093:9091           # <-- Web UI : host 9093 -> container 9091
+      - 51413:51413         # TCP torrent
+      - 51413:51413/udp     # UDP torrent
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+    mem_limit: 8g
+    mem_reservation: 2g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+
+networks:
+  media_services_network:
+    external: true
