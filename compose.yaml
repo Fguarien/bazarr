@@ -145,7 +145,7 @@ services:
       - TZ=${TZ}
       - LOG_LEVEL=${OVERSEERR_LOG_LEVEL}
     volumes:
-      - ${DATA_ROOT}/config:/app/config
+      - ${DATA_ROOT}/config:/config
     networks:
       - media_services_network
     ports:
