@@ -49,3 +49,9 @@ postgres/postmaster.pid
 
 # ── Prometheus TSDB (ajout auto v4.4) ───────────────────
 prometheus/data/
+
+# ── Bazarr runtime data ─────────────────────────────────
+backup/
+db/
+.cache/
+config/releases.txt
