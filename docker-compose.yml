@@ -1,0 +1,334 @@
+services:
+  bazarr:
+    image: ghcr.io/hotio/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Europe/Brussels
+    volumes:
+      - /opt/docker/bazarr:/config
+      - "/docker-mounts/media/Movies:/movies:rw"
+      - "/docker-mounts/media/TV Shows:/tv:rw"
+    networks:
+      - media_services_network
+    ports:
+      - "6767:6767"
+    restart: always
+    mem_limit: 256m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  radarr:
+    image: ghcr.io/hotio/radarr
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
+    volumes:
+      - /opt/docker/radarr:/config
+      - /docker-mounts/downloads:/downloads
+      - "/docker-mounts/media/Movies:/movies:rw"
+    networks:
+      - media_services_network
+    ports:
+      - "7878:7878"
+    restart: always
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
+    volumes:
+      - /opt/docker/sonarr:/config
+      - /docker-mounts/downloads:/downloads
+      - "/docker-mounts/media/TV Shows:/tv:rw"
+    networks:
+      - media_services_network
+    ports:
+      - "8989:8989"
+    restart: always
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  jackett:
+    image: ghcr.io/hotio/jackett
+    container_name: jackett
+    environment:
+      - AUTO_UPDATE=true
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Europe/Bucharest
+    volumes:
+      - /opt/docker/jackett/config:/config
+      - /opt/docker/jackett/downloads:/downloads
+    networks:
+      - media_services_network
+    ports:
+      - 9117:9117
+    restart: always
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  lidarr:
+    image: ghcr.io/hotio/lidarr:nightly
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=Europe/Brussels
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=ffmpeg
+    volumes:
+      - /opt/docker/lidarr/config:/config
+      - /docker-mounts/music/organized:/music
+      - /docker-mounts/music/Classical:/classical
+      - /docker-mounts/music/deleted:/trashed
+      - /docker-mounts/downloads:/downloads
+    networks:
+      - media_services_network
+    ports:
+      - "8686:8686"
+    restart: always
+    mem_limit: 1g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  overseerr:
+    image: ghcr.io/hotio/seerr
+    container_name: overseerr
+    environment:
+      - TZ=${TZ}
+      - LOG_LEVEL=${OVERSEERR_LOG_LEVEL}
+    volumes:
+      - ${DATA_ROOT}/config:/config
+    networks:
+      - media_services_network
+    ports:
+      - "${OVERSEERR_HTTP_PORT}:5055"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:5055/api/v1/status >/dev/null 2>&1 || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    restart: always
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  unpackerr:
+    image: ghcr.io/hotio/unpackerr
+    container_name: unpackerr
+    networks:
+      - media_services_network
+    volumes:
+      - /opt/docker/bazarr/compose.yaml
+      - /docker-mounts/downloads:/downloads
+    restart: always
+    environment:
+      - TZ=Europe/Brussels
+      - UN_LOG_FILE=/downloads/unpackerr.log
+      - UN_SONARR_0_URL=${UN_SONARR_0_URL}
+      - UN_SONARR_0_API_KEY=${UN_SONARR_0_API_KEY}
+      - UN_RADARR_0_URL=${UN_RADARR_0_URL}
+      - UN_RADARR_0_API_KEY=${UN_RADARR_0_API_KEY}
+    mem_limit: 256m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      #- USER=${USER}
+      #
+      - PASS=${PASS}
+    volumes:
+      - /docker-mounts/downloads:/downloads
+      - /docker-mounts/downloads/watch:/watch
+      - /opt/docker/transmission/config:/config
+    networks:
+      - media_services_network
+    ports:
+      - 9093:9091           # <-- Web UI : host 9093 -> container 9091
+      - 51413:51413         # TCP torrent
+      - 51413:51413/udp     # UDP torrent
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+  readarr:
+    image: ghcr.io/pennydreadful/bookshelf:hardcover-v0.4.20.91
+    container_name: readarr
+    restart: always
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=Europe/Brussels
+      - DOTNET_SYSTEM_NET_DISABLEIPV6=true
+      - DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2SUPPORT=false
+    volumes:
+      - /opt/docker/readarr:/config
+      - /docker-mounts/readable/Calibre:/books
+      - /docker-mounts/readable/AutresLivres:/books2
+      - /docker-mounts/media/Audiobooks:/audiobooks
+      - /docker-mounts/downloads/readarr:/downloads
+    networks:
+      - media_services_network
+    ports:
+      - "8787:8787"
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "-", "http://localhost:8787/ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    container_name: tdarr
+    restart: always
+    environment:
+      - TZ=Europe/Brussels
+      - PUID=1026
+      - PGID=100
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=true
+      - inContainer=true
+      - ffmpegVersion=7
+      - nodeName=Ubuntu_Internal_Node
+      - auth=false
+    volumes:
+      - /opt/docker/tdarr/server:/app/server
+      - /opt/docker/tdarr/configs:/app/configs
+      - /opt/docker/tdarr/logs:/app/logs
+      - /docker-mounts/media:/media
+      - /docker-mounts/media/tmp:/temp
+    networks:
+      - media_services_network
+    ports:
+      - "8265:8265"
+      - "8266:8266"
+    mem_limit: 1g
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr
+    container_name: prowlarr
+    restart: always
+    environment:
+      - PUID=1026
+      - PGID=100
+      - TZ=Europe/Brussels
+      - UMASK=002
+    volumes:
+      - /opt/docker/prowlarr/config:/config
+    ports:
+      - "9696:9696"
+    networks:
+      - media_services_network
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Brussels
+      - PROXY=http://smart-gftiza7j0392_area-BE:nglFdBD36xucxwrb@proxy.smartproxy.net:3120
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    networks:
+      - media_services_network
+    ports:
+      - "8191:8191"
+    volumes:
+      - /opt/docker/flaresolverr:/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8191/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    mem_limit: 512m
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+        max-file: "3"
+
+networks:
+  media_services_network:
+    external: true

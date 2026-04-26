@@ -58,3 +58,4 @@ config/releases.txt
 .env.bak
 config/config.yaml
 config/config.yaml.bak
+docker-compose.yml
