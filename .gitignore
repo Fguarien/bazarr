@@ -55,3 +55,6 @@ backup/
 db/
 .cache/
 config/releases.txt
+.env.bak
+config/config.yaml
+config/config.yaml.bak
